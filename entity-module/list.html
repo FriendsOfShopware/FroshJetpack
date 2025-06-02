@@ -1,0 +1,66 @@
+<sw-page>
+    <template #search-bar>
+        <sw-search-bar
+            v-if="config.showSearchBar"
+            :initialSearchType="$tc(config.moduleName + '.searchType')"
+            :initialSearch="term"
+            @search="onSearch">
+        </sw-search-bar>
+    </template>
+    <template #smart-bar-header>
+        <h2>
+            {{ $tc('sw-settings.index.title') }}
+            <sw-icon
+                    name="regular-chevron-right-xs"
+                    small
+            />
+            {{ $tc(config.moduleName + '.title') }}
+
+            <span
+                v-if="!isLoading"
+                class="sw-page__smart-bar-amount"
+            >
+                ({{ total }})
+            </span>
+        </h2>
+    </template>
+    <template #smart-bar-actions>
+        <mt-button
+            v-tooltip.bottom="{
+                message: $tc('sw-privileges.tooltip.warning'),
+                disabled: acl.can(config.entity + '.creator'),
+                showOnDisabledElements: true
+            }"
+            variant="primary"
+            :disabled="!acl.can(config.entity + '.creator') || undefined"
+            @click="$router.push({ name: config.baseRouteName + '.create' })"
+        >
+            {{ $tc(config.moduleName + '.list.create') }}
+        </mt-button>
+    </template>
+    <template #language-switch>
+        <sw-language-switch
+            v-if="translatable"
+            @on-change="onChangeLanguage"
+        />
+    </template>
+    <template #content>
+        <sw-entity-listing
+            ref="table"
+            v-if="items"
+            :items="items"
+            :columns="columns"
+            :isLoading="isLoading"
+            :repository="repository"
+            :detailRoute="config.baseRouteName + '.detail'"
+        >
+        <template #detail-action="{ item }">
+            <sw-context-menu-item 
+                class="sw-entity-listing__context-menu-show-action"
+                :routerLink="{ name: config.baseRouteName + '.detail', params: { id: item.id } }">
+                {{ $tc(config.moduleName + '.list.open') }}
+            </sw-context-menu-item>
+        </template>
+        </sw-entity-listing>
+    </template>
+</sw-page>

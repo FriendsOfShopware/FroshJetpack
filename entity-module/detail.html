@@ -1,0 +1,44 @@
+<sw-page>
+    <template #smart-bar-actions>
+        <sw-button-process
+            class="sw-customer-create__save-action"
+            :is-loading="isLoading"
+            :disabled="isLoading"
+            :process-success="isSaveSuccessful"
+            variant="primary"
+            @update:process-success="saveFinish"
+            @click.prevent="onSave"
+        >
+            {{ $tc(config.moduleName + '.detail.save') }}
+        </sw-button-process>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch
+            v-if="config.translatable && entityId"
+            :save-changes-function="saveOnLanguageChange"
+            :abort-change-function="abortOnLanguageChange"
+            @on-change="onChangeLanguage"
+        />
+    </template>
+
+    <template #content>
+        <sw-card-view v-if="item">
+            <sw-card
+                v-for="card in config.cards"
+                :key="card.name"
+                :title="$tc(card.label)"
+                :position-identifier="card.label"
+            >
+            <component
+                v-for="(field, key) in card.fields"
+                :key="key"
+                :is="getInputComponent(field.type)"
+                v-bind="getInputProps(field, key)"
+                v-model="item[key]"
+                v-model:value="item[key]"
+            />
+            </sw-card>
+        </sw-card-view>
+    </template>
+</sw-page>

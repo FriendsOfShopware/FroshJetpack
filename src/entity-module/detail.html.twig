@@ -9,7 +9,7 @@
             @update:process-success="saveFinish"
             @click.prevent="onSave"
         >
-            {{ $tc(config.moduleName + '.detail.save') }}
+            {{ $tc(config.moduleName + '.detail.actions.save') }}
         </sw-button-process>
     </template>
 
@@ -24,17 +24,21 @@
 
     <template #content>
         <sw-card-view v-if="item">
+            <sw-language-info
+                v-if="config.translatable && entityId"
+                :entity-description="entityDescription"
+            />
             <sw-card
                 v-for="card in config.cards"
                 :key="card.name"
-                :title="$tc(card.label)"
-                :position-identifier="card.label"
+                :title="$tc(config.moduleName + '.detail.cards.' + card.name + '.title')"
+                :position-identifier="card.name"
             >
             <component
                 v-for="(field, key) in card.fields"
                 :key="key"
                 :is="getInputComponent(field.type)"
-                v-bind="getInputProps(field, key)"
+                v-bind="getInputProps(field, card.name, key)"
                 v-model="item[key]"
                 v-model:value="item[key]"
             />

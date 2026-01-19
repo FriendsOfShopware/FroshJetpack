@@ -1,5 +1,58 @@
 {
-    "name": "@friendsofshopware/jetpack",
-    "version": "0.0.1",
-    "description": "Jetpack is a rapid development framework for Shopware 6 administration."
+  "name": "@friendsofshopware/jetpack",
+  "version": "0.0.1",
+  "description": "Jetpack is a rapid development framework for Shopware 6 administration.",
+  "author": "Friends of Shopware",
+  "license": "MIT",
+  "homepage": "https://github.com/FriendsOfShopware/jetpack",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriendsOfShopware/jetpack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FriendsOfShopware/jetpack/issues"
+  },
+  "keywords": [
+    "shopware",
+    "shopware6",
+    "administration",
+    "admin",
+    "module",
+    "entity",
+    "crud"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tshy",
+    "prepare": "tshy"
+  },
+  "devDependencies": {
+    "tshy": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
+  "main": "./dist/commonjs/index.js",
+  "types": "./dist/commonjs/index.d.ts",
+  "module": "./dist/esm/index.js"
 }

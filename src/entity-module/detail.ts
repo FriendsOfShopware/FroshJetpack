@@ -1,4 +1,4 @@
-import { getState, setState } from '../utils';
+import { isEntityTranslatable, setState } from '../utils.js';
 // @ts-ignore
 import template from './detail.html.twig';
 
@@ -6,22 +6,26 @@ type InputType = 'text' | 'number' | 'checkbox' | 'password' | 'textarea' | 'url
 
 export type DetailField<T extends InputType = InputType> = {
     type: T;
-    label: string;
     placeholder?: string;
     helpText?: string;
   } & (T extends 'multi-select' | 'select' ? { options: Record<string, string> } : {});
 
-type DetailOptions = {
-    entity: string,
-    cards: {
-        label: string
-        fields: Record<string, DetailField>
-    }[]
+type CardOptions<K extends string> = {
+    name: string,
+    fields: Record<K, DetailField>
 }
 
-type DetailMerged = DetailOptions & {
+type DetailOptions<C extends CardOptions<string>[]> = {
+    entity: string,
+    cards: C,
+    labelProperty?: string,
+}
+
+type DetailMerged = DetailOptions<CardOptions<string>[]> & {
     moduleName: string,
     baseRouteName: string,
+    translatable: boolean,
+    labelProperty: string,
 }
 
 function toCamelCase(value: string) {
@@ -34,12 +38,14 @@ function toCamelCase(value: string) {
     }).join('')
 }
 
-export function registerDetailComponent(userConfig: DetailOptions): string {
+export function registerDetailComponent<C extends CardOptions<string>[]>(userConfig: C extends [] ? never : DetailOptions<C>): string {
     const moduleName = `jetpack-${userConfig.entity.replaceAll('_', '-')}`
     const config: DetailMerged = {
         ...userConfig,
         moduleName,
         baseRouteName: moduleName.replaceAll('-', '.'),
+        translatable: isEntityTranslatable(userConfig.entity),
+        labelProperty: userConfig.labelProperty || 'name',
     }
 
     const entityNameCamelCase = toCamelCase(userConfig.entity)
@@ -51,6 +57,7 @@ export function registerDetailComponent(userConfig: DetailOptions): string {
         inject: ['repositoryFactory'],
         mixins: [
             Shopware.Mixin.getByName('notification'),
+            Shopware.Mixin.getByName('placeholder'),
         ],
         props: {
             entityId: {
@@ -83,6 +90,10 @@ export function registerDetailComponent(userConfig: DetailOptions): string {
                 return this.repositoryFactory.create(config.entity);
             },
 
+            entityDescription() {
+                return this.placeholder(this.item, config.labelProperty, this.item?.id || '');
+            },
+
             ...Shopware.Component.getComponentHelper().mapPropertyErrors(entityNameCamelCase, Object.keys(Shopware.EntityDefinition.getRequiredFields(userConfig.entity)).filter((field) => field !== 'id' && field !== 'createdAt'))
         },
 
@@ -110,15 +121,15 @@ export function registerDetailComponent(userConfig: DetailOptions): string {
                 throw new Error(`Invalid input type: ${type}`);
             },
 
-            getInputProps(field: DetailField, name: string) {
+            getInputProps(field: DetailField, cardName: string, fieldName: string) {
                 const props: Record<string, any> = {}
 
-                props.label = field.label
-                props.placeholder = field.placeholder
+                props.label = this.$tc(`${config.moduleName}.detail.cards.${cardName}.fields.${fieldName}`)
+                props.placeholder = this.placeholder(this.item, fieldName, field.placeholder || '')
                 props.helpText = field.helpText
 
-                if (Object.keys(Shopware.EntityDefinition.getRequiredFields(userConfig.entity)).includes(name)) {
-                    props.error = this[entityNameCamelCase + name.charAt(0).toUpperCase() + name.slice(1) + 'Error']
+                if (Object.keys(Shopware.EntityDefinition.getRequiredFields(userConfig.entity)).includes(fieldName)) {
+                    props.error = this[entityNameCamelCase + fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + 'Error']
                 }
 
                 switch (field.type) {
@@ -160,9 +171,8 @@ export function registerDetailComponent(userConfig: DetailOptions): string {
                 return this.onSave();
             },
 
-            onChangeLanguage(languageId: string) {
-                setState('context', 'setApiLanguageId', languageId);
-                this.createdComponent();
+            onChangeLanguage() {
+                this.getItem();
             },
 
             onSave() {
@@ -192,9 +202,7 @@ export function registerDetailComponent(userConfig: DetailOptions): string {
 
         created() {
             if (!this.entityId) {
-                if (getState('context', 'isSystemDefaultLanguage')) {
-                    setState('context', 'resetLanguageToDefault');
-                }
+                setState('context', 'resetLanguageToDefault');
             }
 
             this.getItem();

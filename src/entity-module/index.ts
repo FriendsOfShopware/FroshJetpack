@@ -38,7 +38,7 @@ export function registerEntityModule(userConfig: EntityModule) {
                 component: config.listingComponent,
                 path: 'list',
                 meta: {
-                    privilege: `${config.moduleName}:read`,
+                    privilege: `${config.entity}:read`,
                     parentPath: config.parentPath
                 },
             },
@@ -46,7 +46,7 @@ export function registerEntityModule(userConfig: EntityModule) {
                 component: config.detailComponent,
                 path: 'create',
                 meta: {
-                    privilege: `${config.moduleName}:create`,
+                    privilege: `${config.entity}:create`,
                     parentPath: `${config.baseRouteName}.list`
                 },
                 props: {
@@ -59,7 +59,7 @@ export function registerEntityModule(userConfig: EntityModule) {
                 component: config.detailComponent,
                 path: 'detail/:id',
                 meta: {
-                    privilege: `${config.moduleName}:read`,
+                    privilege: `${config.entity}:read`,
                     parentPath: `${config.baseRouteName}.list`
                 },
                 props: {
@@ -85,7 +85,7 @@ export function registerEntityModule(userConfig: EntityModule) {
                 to: `${config.baseRouteName}.list`,
                 icon: config.icon,
                 name: `${config.moduleName}.title`,
-                privilege: `${config.moduleName}:read`
+                privilege: `${config.entity}:read`
             }
         ] : []
     })

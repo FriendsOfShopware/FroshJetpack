@@ -31,7 +31,7 @@
             :disabled="!acl.can(config.entity + '.creator') || undefined"
             @click="$router.push({ name: config.baseRouteName + '.create' })"
         >
-            {{ $tc(config.moduleName + '.list.create') }}
+            {{ $tc(config.moduleName + '.list.actions.create') }}
         </mt-button>
     </template>
     <template #language-switch>
@@ -54,7 +54,7 @@
             <sw-context-menu-item
                 class="sw-entity-listing__context-menu-show-action"
                 :routerLink="{ name: config.baseRouteName + '.detail', params: { id: item.id } }">
-                {{ $tc(config.moduleName + '.list.open') }}
+                {{ $tc(config.moduleName + '.list.actions.edit') }}
             </sw-context-menu-item>
         </template>
         </sw-entity-listing>

@@ -1,4 +1,4 @@
-import { isEntityTranslatable, setState } from '../utils';
+import { isEntityTranslatable, setState } from '../utils.js';
 // @ts-ignore
 import template from './list.html.twig';
 
@@ -15,28 +15,33 @@ type DataGridColumn = {
     routerLink: string | null
 }
 
-type ListingOptions = {
-    entity: string,
-    showSearchBar?: boolean,
-    columns: Record<string, {
-        label: string,
-        sortable?: boolean,
-        allowResize?: boolean,
-        width?: string,
-        visible?: boolean
-        align?: 'left' | 'right'
-        naturalSorting?: boolean,
-        inlineEdit?: 'string' | 'number'
-        linkToDetail?: boolean
-    }>
+type ColumnOptions = {
+    sortable?: boolean,
+    allowResize?: boolean,
+    width?: string,
+    visible?: boolean
+    align?: 'left' | 'right'
+    naturalSorting?: boolean,
+    inlineEdit?: 'string' | 'number'
+    linkToDetail?: boolean
 }
 
-type ListingMerged = ListingOptions & {
+type ListingOptions<K extends string> = {
+    entity: string,
+    showSearchBar?: boolean,
+    columns: Record<K, ColumnOptions>
+}
+
+type ListingMerged = ListingOptions<string> & {
     baseRouteName: string,
     moduleName: string,
 }
 
-export function registerListingComponent(userConfig: ListingOptions): string {
+export function registerListingComponent<K extends string>(userConfig: K extends never ? never : ListingOptions<K>): string {
+    if (Object.keys(userConfig.columns).length === 0) {
+        throw new Error(`[FroshJetpack] Listing for entity "${userConfig.entity}" must have at least one column defined`);
+    }
+
     const moduleName = `jetpack-${userConfig.entity.replaceAll('_', '-')}`
     const config: ListingMerged = {
         ...userConfig,
@@ -79,7 +84,7 @@ export function registerListingComponent(userConfig: ListingOptions): string {
                 for (const [key, value] of Object.entries(config.columns)) {
                     columns.push({
                         property: key,
-                        label: value.label,
+                        label: this.$tc(`${config.moduleName}.list.columns.${key}`),
                         sortable: value.sortable || true,
                         width: value.width || 'auto',
                         allowResize: value.allowResize || true,

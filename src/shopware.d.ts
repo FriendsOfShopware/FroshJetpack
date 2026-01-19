@@ -22,7 +22,7 @@ interface ShopwareState {
 }
 
 interface ShopwareData {
-    Criteria: any;
+    Criteria: new (page?: number, limit?: number) => { setTerm: (term: string | null) => void };
 }
 
 interface ShopwareContext {
@@ -46,8 +46,7 @@ interface Shopware {
 
 declare const Shopware: Shopware;
 
-
-declare module '*.html' {
+declare module '*.html.twig' {
     const content: string;
     export default content;
-  }
+}

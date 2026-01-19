@@ -69,7 +69,7 @@ registerEntityModule({
 
 ## Documentation
 
-For full documentation, visit our [documentation site](https://github.com/FriendsOfShopware/jetpack).
+For full documentation, visit our [documentation site](https://friendsofshopware.github.io/jetpack/).
 
 ### API Reference
 

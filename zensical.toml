@@ -11,31 +11,35 @@
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "Documentation"
+site_name = "Jetpack"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A new project generated from the default template project."
+site_description = "A rapid development framework for Shopware 6 Administration modules. Build complete CRUD interfaces with minimal code."
 
 # The site_author attribute. This is used in the HTML head element.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_author
-site_author = "<your name here>"
+site_author = "Friends of Shopware"
 
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
-#site_url = "https://www.example.com/"
+site_url = "https://friendsofshopware.github.io/jetpack/"
 
 # The copyright notice appears in the page footer and can contain an HTML
 # fragment.
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; 2026 The authors
+Copyright &copy; 2026 Friends of Shopware
 """
+
+# Repository configuration
+repo_url = "https://github.com/FriendsOfShopware/jetpack"
+repo_name = "FriendsOfShopware/jetpack"
 
 # Zensical supports both implicit navigation and explicitly defined navigation.
 # If you decide not to define a navigation here then Zensical will simply
@@ -122,13 +126,13 @@ features = [
     # will generate an edit button for the page. This works for common
     # repository hosting services.
     # https://zensical.org/docs/setup/repository/#code-actions
-    #"content.action.edit",
+    "content.action.edit",
 
     # If you have a repository configured and turn on this feature, Zensical
     # will generate a button that allows the user to view the Markdown
     # code for the current page.
     # https://zensical.org/docs/setup/repository/#code-actions
-    #"content.action.view",
+    "content.action.view",
 
     # Code annotations allow you to add an icon with a tooltip to your
     # code blocks to provide explanations at crucial points.
@@ -299,8 +303,12 @@ toggle.name = "Switch to light mode"
 # ----------------------------------------------------------------------------
 # The "extra" section contains miscellaneous settings.
 # ----------------------------------------------------------------------------
-#[[project.extra.social]]
-#icon = "fontawesome/brands/github"
-#link = "https://github.com/user/repo"
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/FriendsOfShopware/jetpack"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/npm"
+link = "https://www.npmjs.com/package/@friendsofshopware/jetpack"
 
 

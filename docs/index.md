@@ -2,9 +2,9 @@
 icon: lucide/rocket
 ---
 
-# FroshJetpack
+# Jetpack
 
-FroshJetpack is a library that simplifies building Shopware 6 Administration modules. Instead of writing boilerplate Vue components, templates, and routing configuration, you can declaratively define your entity modules with a simple configuration object.
+Jetpack is a library that simplifies building Shopware 6 Administration modules. Instead of writing boilerplate Vue components, templates, and routing configuration, you can declaratively define your entity modules with a simple configuration object.
 
 ## Features
 

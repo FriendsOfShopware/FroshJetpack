@@ -1,14 +1,15 @@
 import { isEntityTranslatable, setState } from '../utils';
-import template from './list.html';
+// @ts-ignore
+import template from './list.html.twig';
 
-type DataGridColumn = { 
-    property: string, 
-    label: string, 
-    sortable: boolean, 
-    width: string, 
-    allowResize: boolean, 
-    visible: boolean, 
-    naturalSorting: boolean, 
+type DataGridColumn = {
+    property: string,
+    label: string,
+    sortable: boolean,
+    width: string,
+    allowResize: boolean,
+    visible: boolean,
+    naturalSorting: boolean,
     align: string
     inlineEdit: string | null
     routerLink: string | null
@@ -36,7 +37,7 @@ type ListingMerged = ListingOptions & {
 }
 
 export function registerListingComponent(userConfig: ListingOptions): string {
-    const moduleName = userConfig.entity.replaceAll('_', '-')
+    const moduleName = `jetpack-${userConfig.entity.replaceAll('_', '-')}`
     const config: ListingMerged = {
         ...userConfig,
         baseRouteName: moduleName.replaceAll('-', '.'),

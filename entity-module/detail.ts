@@ -1,5 +1,6 @@
 import { getState, setState } from '../utils';
-import template from './detail.html';
+// @ts-ignore
+import template from './detail.html.twig';
 
 type InputType = 'text' | 'number' | 'checkbox' | 'password' | 'textarea' | 'url' | 'select' | 'multi-select'
 
@@ -34,7 +35,7 @@ function toCamelCase(value: string) {
 }
 
 export function registerDetailComponent(userConfig: DetailOptions): string {
-    const moduleName = userConfig.entity.replaceAll('_', '-')
+    const moduleName = `jetpack-${userConfig.entity.replaceAll('_', '-')}`
     const config: DetailMerged = {
         ...userConfig,
         moduleName,

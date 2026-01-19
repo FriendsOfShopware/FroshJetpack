@@ -11,9 +11,9 @@ export type EntityModule = {
 }
 
 export function registerEntityModule(userConfig: EntityModule) {
-    const moduleName = userConfig.entity.replaceAll('_', '-')
-    const config = { 
-        ...userConfig, 
+    const moduleName = `jetpack-${userConfig.entity.replaceAll('_', '-')}`
+    const config = {
+        ...userConfig,
         moduleName,
         baseRouteName: moduleName.replaceAll('-', '.'),
         color: userConfig.color || '#9AA8B5',

@@ -2,9 +2,12 @@
 icon: lucide/rocket
 ---
 
-![FroshJetpack Logo](assets/logo.png)
-
 # Getting Started
+
+<p align="center">
+  <img src="assets/logo.png" alt="FroshJetpack Logo">
+</p>
+
 
 Jetpack is a library that simplifies building Shopware 6 Administration modules. Instead of writing boilerplate Vue components, templates, and routing configuration, you can declaratively define your entity modules with a simple configuration object.
 

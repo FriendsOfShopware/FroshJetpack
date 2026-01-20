@@ -81,37 +81,37 @@ For full documentation, visit our [documentation site](https://friendsofshopware
 
 Registers a complete Administration module with routing and navigation.
 
-| Option | Type | Required | Default | Description |
-|--------|------|----------|---------|-------------|
-| `entity` | `string` | Yes | - | Entity name |
-| `listingComponent` | `string` | Yes | - | Component from `registerListingComponent` |
-| `detailComponent` | `string` | Yes | - | Component from `registerDetailComponent` |
-| `color` | `string` | No | `#9AA8B5` | Module color |
-| `icon` | `string` | No | `regular-envelope` | Module icon |
-| `showInNavigation` | `boolean` | No | `true` | Show in main navigation |
-| `showInSettings` | `boolean` | No | `false` | Show in settings |
-| `navigationParentModule` | `string` | No | `sw-customer` | Parent module for navigation |
+| Option                   | Type      | Required | Default            | Description                               |
+|--------------------------|-----------|----------|--------------------|-------------------------------------------|
+| `entity`                 | `string`  | Yes      | -                  | Entity name                               |
+| `listingComponent`       | `string`  | Yes      | -                  | Component from `registerListingComponent` |
+| `detailComponent`        | `string`  | Yes      | -                  | Component from `registerDetailComponent`  |
+| `color`                  | `string`  | No       | `#9AA8B5`          | Module color                              |
+| `icon`                   | `string`  | No       | `regular-envelope` | Module icon                               |
+| `showInNavigation`       | `boolean` | No       | `true`             | Show in main navigation                   |
+| `showInSettings`         | `boolean` | No       | `false`            | Show in settings                          |
+| `navigationParentModule` | `string`  | No       | `sw-customer`      | Parent module for navigation              |
 
 #### `registerListingComponent(options)`
 
 Creates a listing page component.
 
-| Option | Type | Required | Description |
-|--------|------|----------|-------------|
-| `entity` | `string` | Yes | Entity name |
-| `columns` | `Record<string, ColumnOptions>` | Yes | Column configuration |
-| `showSearchBar` | `boolean` | No | Show search bar |
+| Option          | Type                            | Required | Description          |
+|-----------------|---------------------------------|----------|----------------------|
+| `entity`        | `string`                        | Yes      | Entity name          |
+| `columns`       | `Record<string, ColumnOptions>` | Yes      | Column configuration |
+| `showSearchBar` | `boolean`                       | No       | Show search bar      |
 
 **Column Options:**
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `linkToDetail` | `boolean` | `false` | Link to detail page |
-| `sortable` | `boolean` | `true` | Allow sorting |
-| `width` | `string` | `'auto'` | Column width |
-| `align` | `'left' \| 'right'` | `'left'` | Text alignment |
-| `visible` | `boolean` | `true` | Column visibility |
-| `inlineEdit` | `'string' \| 'number'` | - | Enable inline editing |
+| Option         | Type                   | Default  | Description           |
+|----------------|------------------------|----------|-----------------------|
+| `linkToDetail` | `boolean`              | `false`  | Link to detail page   |
+| `sortable`     | `boolean`              | `true`   | Allow sorting         |
+| `width`        | `string`               | `'auto'` | Column width          |
+| `align`        | `'left' \| 'right'`    | `'left'` | Text alignment        |
+| `visible`      | `boolean`              | `true`   | Column visibility     |
+| `inlineEdit`   | `'string' \| 'number'` | -        | Enable inline editing |
 
 #### `registerDetailComponent(options)`
 

@@ -1,5 +1,9 @@
 # @friendsofshopware/jetpack
 
+<p align="center">
+  <img src="docs/assets/logo.png" alt="FroshJetpack Logo">
+</p>
+
 A rapid development framework for Shopware 6 Administration modules. Build complete CRUD interfaces for your entities with minimal code.
 
 ## Installation

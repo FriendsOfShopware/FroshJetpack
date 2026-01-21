@@ -94,6 +94,13 @@ For translatable entities, FroshJetpack automatically:
 - Shows a language switch in the toolbar
 - Reloads the list when language changes
 
+## Actions & Context Menu
+
+The listing component automatically includes a **Context Menu** for each row with the following actions:
+
+- **Edit:** Links to the detail page.
+- **Delete:** Opens a delete confirmation modal and removes the item if confirmed. This requires the `{entity}:delete` privilege.
+
 ## Examples
 
 ### Multiple Columns

@@ -30,7 +30,7 @@ registerEntityModule({
 | `listingComponent` | `string` | Yes | - | Component name returned by `registerListingComponent` |
 | `detailComponent` | `string` | Yes | - | Component name returned by `registerDetailComponent` |
 | `color` | `string` | No | `#9AA8B5` | Module color in hex format |
-| `icon` | `string` | No | `regular-envelope` | Icon name from Shopware icon set |
+| `icon` | `string` | No | `regular-envelope` | Icon name from [Shopware Icon Set](https://component-library.shopware.com/icons/) |
 | `showInNavigation` | `boolean` | No | `true` | Show module in main navigation |
 | `showInSettings` | `boolean` | No | `false` | Show module in settings |
 | `navigationParentModule` | `string` | No | `sw-customer` | Parent module for navigation placement |
@@ -38,7 +38,7 @@ registerEntityModule({
 
 ## Generated Routes
 
-FroshJetpack automatically generates three routes for your module:
+FroshJetpack automatically generates three routes for your module. You can use these route names to link to your module from other parts of the administration (e.g., in `<sw-button :to="{ name: 'jetpack.store.list' }">`).
 
 | Route | Path | Description |
 |-------|------|-------------|

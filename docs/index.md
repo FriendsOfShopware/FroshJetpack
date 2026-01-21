@@ -19,6 +19,18 @@ Jetpack is a library that simplifies building Shopware 6 Administration modules.
 - Built-in translation support for translatable entities
 - Type-safe configuration with TypeScript
 
+## Installation
+
+Install the package via npm inside your Shopware plugin's administration directory:
+
+```bash
+npm install @friendsofshopware/jetpack
+```
+
+**Prerequisites:**
+- Shopware 6.7 or newer
+- Node.js 22+
+
 ## Quick Start
 
 Given the following Shopware entity:
@@ -93,7 +105,8 @@ registerEntityModule({
 
 ## Required Snippets
 
-FroshJetpack uses translation keys for all labels. You need to provide snippet files for your module:
+FroshJetpack uses translation keys for all labels. You need to provide snippet files for your module.
+Add these snippets to your administration snippet file, typically located at `src/Resources/app/administration/src/snippet/en-GB.json`.
 
 ```json
 {
@@ -127,6 +140,6 @@ FroshJetpack uses translation keys for all labels. You need to provide snippet f
 
 ## Next Steps
 
-- [Module Registration](module-registration.md) - Learn about all module options
-- [Listing Component](listing-component.md) - Configure your listing page
-- [Detail Component](detail-component.md) - Configure your detail/create page
+- [Module Registration](custom-module/) - Learn about all module options
+- [Listing Component](custom-module/listing-component.md) - Configure your listing page
+- [Detail Component](custom-module/detail-component.md) - Configure your detail/create page
